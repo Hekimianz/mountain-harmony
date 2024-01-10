@@ -44,6 +44,10 @@ module.exports = {
 
         // Exclude password from the response
         const { password: _, ...userData } = newUser.rows[0];
+        // create new users cart
+        await pool.query("INSERT INTO carts (user_id) VALUES ($1)", [
+          userData.id,
+        ]);
         res.status(201).json(userData);
       } catch (error) {
         res.status(500).json({ error: "Internal server error" });
@@ -89,6 +93,30 @@ module.exports = {
       } catch (error) {
         res.status(500).json({ message: "Something went wrong" });
       }
+    } else {
+      res.status(401).json({ message: "Not authenticated" });
+    }
+  },
+  addToCart: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const productId = req.body.productId;
+        const cartResult = await pool.query(
+          "SELECT id FROM carts WHERE user_id = $1",
+          [userId]
+        );
+        const cartId = cartResult.rows[0].id;
+        await pool.query(
+          "INSERT INTO carts_products (cart_id, product_id) VALUES ($1, $2)",
+          [cartId, productId]
+        );
+        res.json({ message: "Product added to cart successfully" });
+      } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+      }
+    } else {
+      res.status(401).json({ message: "Not authenticated" });
     }
   },
 };
