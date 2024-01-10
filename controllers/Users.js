@@ -76,4 +76,19 @@ module.exports = {
       res.status(401).json({ message: "Not authenticated" });
     }
   },
+
+  getCart: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const usersCart = await pool.query(
+          "SELECT u.name AS UserName, p.id AS ProductID, p.name AS ProductName, p.description, p.price, p.category, p.image_url FROM  users u INNER JOIN carts c ON u.id = c.user_id INNER JOIN carts_products cp ON c.id = cp.cart_id INNER JOIN products p ON cp.product_id = p.id WHERE u.id = $1;",
+          [userId]
+        );
+        res.json(usersCart.rows);
+      } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+      }
+    }
+  },
 };
