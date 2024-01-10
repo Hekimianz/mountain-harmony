@@ -57,4 +57,13 @@ module.exports = {
       res.json({ message: "Logged in succesfully" });
     },
   ],
+
+  logout: (req, res) => {
+    req.logout(function (err) {
+      if (err) {
+        return next(err); // or handle the error in another appropriate way
+      }
+      res.json({ message: "Successfully logged out" });
+    });
+  },
 };
