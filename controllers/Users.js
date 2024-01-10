@@ -66,4 +66,14 @@ module.exports = {
       res.json({ message: "Successfully logged out" });
     });
   },
+
+  profile: (req, res) => {
+    if (req.isAuthenticated()) {
+      const userData = { ...req.user };
+      delete userData.password;
+      res.json(userData);
+    } else {
+      res.status(401).json({ message: "Not authenticated" });
+    }
+  },
 };
