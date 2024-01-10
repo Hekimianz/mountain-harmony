@@ -1,6 +1,7 @@
 const pool = require("../models/db");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 module.exports = {
   register: [
     // Validation middleware
@@ -47,6 +48,13 @@ module.exports = {
       } catch (error) {
         res.status(500).json({ error: "Internal server error" });
       }
+    },
+  ],
+
+  login: [
+    passport.authenticate("local"),
+    (req, res) => {
+      res.json({ message: "Logged in succesfully" });
     },
   ],
 };
