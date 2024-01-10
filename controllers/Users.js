@@ -119,4 +119,24 @@ module.exports = {
       res.status(401).json({ message: "Not authenticated" });
     }
   },
+  removeFromCart: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const productId = req.body.productId;
+        const cartResult = await pool.query(
+          "SELECT id FROM carts WHERE user_id = $1",
+          [userId]
+        );
+        const cartId = cartResult.rows[0].id;
+        await pool.query(
+          "DELETE FROM carts_products WHERE cart_id = $1 AND product_id = $2",
+          [cartId, productId]
+        );
+        res.json({ message: "Product removed from cart succesfully" });
+      } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+      }
+    }
+  },
 };
