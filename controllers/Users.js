@@ -86,7 +86,7 @@ module.exports = {
       try {
         const userId = req.user.id;
         const usersCart = await pool.query(
-          "SELECT u.name AS UserName, p.id AS ProductID, p.name AS ProductName, p.description, p.price, p.category, p.image_url FROM  users u INNER JOIN carts c ON u.id = c.user_id INNER JOIN carts_products cp ON c.id = cp.cart_id INNER JOIN products p ON cp.product_id = p.id WHERE u.id = $1;",
+          "SELECT u.name AS UserName, p.id AS ProductID, p.name AS ProductName, p.description, p.price, p.category, p.image_url, cp.quantity FROM  users u INNER JOIN carts c ON u.id = c.user_id INNER JOIN carts_products cp ON c.id = cp.cart_id INNER JOIN products p ON cp.product_id = p.id WHERE u.id = $1;",
           [userId]
         );
         res.json(usersCart.rows);
@@ -102,14 +102,15 @@ module.exports = {
       try {
         const userId = req.user.id;
         const productId = req.body.productId;
+        const quantity = req.body.quantity;
         const cartResult = await pool.query(
           "SELECT id FROM carts WHERE user_id = $1",
           [userId]
         );
         const cartId = cartResult.rows[0].id;
         await pool.query(
-          "INSERT INTO carts_products (cart_id, product_id) VALUES ($1, $2)",
-          [cartId, productId]
+          "INSERT INTO carts_products (cart_id, product_id, quantity) VALUES ($1, $2, $3)",
+          [cartId, productId, quantity]
         );
         res.json({ message: "Product added to cart successfully" });
       } catch (error) {
@@ -136,6 +137,75 @@ module.exports = {
         res.json({ message: "Product removed from cart succesfully" });
       } catch (error) {
         res.status(500).json({ message: "Something went wrong" });
+      }
+    }
+  },
+  checkOut: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+        const yyyy = today.getFullYear();
+
+        const finalDate = `${dd}/${mm}/${yyyy}`;
+        const newOrder = await pool.query(
+          "INSERT INTO orders (user_id, order_date) VALUES ($1, $2) RETURNING id",
+          [userId, finalDate]
+        );
+        const newOrderId = newOrder.rows[0].id;
+        const cartResults = await pool.query(
+          "SELECT id FROM carts WHERE user_id = $1",
+          [userId]
+        );
+        const cartId = cartResults.rows[0].id;
+        const cartItems = await pool.query(
+          "SELECT product_id, quantity FROM carts_products WHERE cart_id = $1",
+          [cartId]
+        );
+        for (const item of cartItems.rows) {
+          await pool.query(
+            "INSERT INTO products_orders (order_id, product_id, quantity) VALUES ($1, $2, $3)",
+            [newOrderId, item.product_id, item.quantity]
+          );
+        }
+        await pool.query("DELETE FROM carts_products WHERE cart_id = $1", [
+          cartId,
+        ]);
+        res.json({ message: "Checkout successful", orderId: newOrderId });
+      } catch (error) {
+        res.status(500).json({ message: "Something went wrong." });
+      }
+    }
+  },
+  getPastOrders: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const allOrders = await pool.query(
+          "SELECT o.id AS order_id, o.order_date, p.name AS product, po.quantity AS quantity, po.quantity * p.price AS total_cost FROM orders o INNER JOIN products_orders po ON o.id = po.order_id INNER JOIN products p ON p.id = po.product_id WHERE o.user_id = $1",
+          [userId]
+        );
+
+        res.json(allOrders.rows);
+      } catch (error) {
+        res.status(500).json({ message: "Something went wrong." });
+      }
+    }
+  },
+  getPastOrderById: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const orderId = req.params.id;
+        const order = await pool.query(
+          "SELECT o.id AS order_id, o.order_date, p.name AS product, po.quantity AS quantity, po.quantity * p.price AS total_cost FROM orders o INNER JOIN products_orders po ON o.id = po.order_id INNER JOIN products p ON p.id = po.product_id WHERE o.user_id = $1 AND o.id = $2",
+          [userId, orderId]
+        );
+        res.json(order.rows[0]);
+      } catch (error) {
+        res.status(500).json({ message: "Something went wrong." });
       }
     }
   },
