@@ -1,0 +1,34 @@
+#topNav {
+  display: flex;
+  align-items: center;
+  background-color: #0c2a27;
+  height: 100px;
+  padding: 0 20px;
+}
+
+#logo {
+  height: 80%;
+}
+
+#cart {
+  background-color: #285340;
+  padding: 20px 20px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+  color: #eccc7b;
+  border: 3px solid #0c2a27;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#teasCont {
+  padding: 20px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  row-gap: 20px;
+}

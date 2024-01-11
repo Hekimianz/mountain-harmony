@@ -3,14 +3,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c2a27" />
     <style>
-      html,
-      body {
-        width: 100%;
+      html {
+        height: 100vh;
         margin: 0;
+        position: relative;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+        min-height: 100vh;
+      }
+      html {
+        --s: 55px; /* control the size */
+        --b: 15px; /* control the thickness of the curved lines */
+
+        --_r: calc(1.28 * var(--s) + var(--b) / 2) at top 50%;
+        --_f: calc(99.5% - var(--b)), #f7f3bc calc(101% - var(--b)) 99.5%,
+          #0000 101%;
+        --_g0: calc(-0.8 * var(--s)), #88a65e var(--_f);
+        --_g1: calc(-0.8 * var(--s)), #bfb35a var(--_f);
+        --_s: calc(1.8 * var(--s) + var(--b));
+        background: radial-gradient(var(--_r) right var(--_g0))
+            calc(-1 * var(--_s)) var(--s),
+          radial-gradient(var(--_r) left var(--_g1)) var(--_s)
+            calc(-1 * var(--s)),
+          radial-gradient(var(--_r) right var(--_g1)) calc(var(--_s) / -2)
+            calc(-1 * var(--s)),
+          radial-gradient(var(--_r) left var(--_g0)) calc(var(--_s) / 2)
+            var(--s),
+          linear-gradient(90deg, #88a65e 50%, #bfb35a 0);
+        background-size: var(--_s) calc(4 * var(--s));
+      }
+      body {
+        background-color: #f7f3bcba;
       }
     </style>
     <title>Mountain Harmony</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
