@@ -1,0 +1,67 @@
+#topNav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #285340;
+  height: 100px;
+  padding: 0 20px;
+  margin: 0;
+  z-index: 1;
+}
+
+#logo {
+  height: 80%;
+  cursor: pointer;
+}
+
+.navMenu,
+.activatedMenu {
+  color: #eccc7b;
+  font-size: 2em;
+  transition: 0.2s all;
+}
+
+#sideMenu {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  background-color: #eccc7b;
+  z-index: 1;
+  border-bottom-left-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100px;
+  height: 200px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  color: #232220;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.activatedMenu {
+  rotate: 90deg;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px 0;
+  height: 100%;
+}
+
+ul li .navLink {
+  color: #232220;
+  text-decoration: none;
+}
+
+ul li .active {
+  color: #285340;
+  text-decoration: underline;
+  font-weight: bold;
+}

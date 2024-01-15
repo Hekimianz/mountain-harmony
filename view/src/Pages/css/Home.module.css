@@ -1,0 +1,147 @@
+#cart {
+  background-color: #285340;
+  padding: 20px 20px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+  color: #eccc7b;
+  border: 3px solid #0c2a27;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#teasCont {
+  padding: 20px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  row-gap: 20px;
+}
+
+#welcomeCont {
+  margin-top: 20px;
+  font-family: "Merriweather";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.contImg {
+  width: 95%;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-width: 1200px;
+}
+
+.welcomeText {
+  background-color: #285340;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  width: 95%;
+  max-width: 1200px;
+  color: #f3f3bc;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.highlightText {
+  text-decoration: underline;
+  text-decoration-color: #6cafe1;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  font-weight: 800;
+}
+
+.shopBtn {
+  cursor: pointer;
+  font-weight: 600;
+  font-family: "Open Sans", serif;
+  transition: all 0.2s;
+  padding: 5px 15px;
+  border-radius: 100px;
+  background: #6cafe1;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin: 0 auto;
+  color: #232220;
+}
+
+.shopBtn > svg {
+  width: 24px;
+  margin-left: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.shopBtn:hover svg {
+  transform: translateX(5px);
+}
+
+.shopBtn:active {
+  transform: scale(0.95);
+}
+
+#aboutCont {
+  border-top: 1px solid #f3f3bc;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.titleCont {
+  margin: 0;
+  padding-bottom: 20px;
+}
+
+.aboutText {
+  margin: 0 auto;
+  padding: 0;
+  width: 90%;
+}
+
+.learnBtn {
+  margin-top: 20px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  background: #6cafe1;
+  border: none;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.4s;
+  color: #232220;
+  font-family: "Open Sans", serif;
+  font-weight: 600;
+}
+
+.learnBtn:hover {
+  box-shadow: 7px 5px 56px -14px #73efb7;
+}
+
+.learnBtn:active {
+  transform: scale(0.97);
+  box-shadow: 7px 5px 56px -10px #73efb7;
+}
+
+.btnsCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-top: 1px solid #f3f3bc;
+  margin-top: 20px;
+}
+
+#signInBtn,
+#registerBtn {
+  background: #0c2a27;
+  color: #f3f3bc;
+}
