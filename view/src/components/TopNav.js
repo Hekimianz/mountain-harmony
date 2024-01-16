@@ -13,6 +13,74 @@ function TopNav(props) {
         src={logo}
         alt="mountain harmony logo"
       />
+      <div id={styles.navBarCont}>
+        <ul id={styles.navBarUl}>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive, isPending }) =>
+                `${styles.barNavLink} ${
+                  isPending
+                    ? styles.barPending
+                    : isActive
+                    ? styles.barActive
+                    : ""
+                }`
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/sign-in"
+              className={({ isActive, isPending }) =>
+                `${styles.barNavLink} ${
+                  isPending
+                    ? styles.barPending
+                    : isActive
+                    ? styles.barActive
+                    : ""
+                }`
+              }
+            >
+              Sign in
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/shop"
+              className={({ isActive, isPending }) =>
+                `${styles.barNavLink} ${
+                  isPending
+                    ? styles.barPending
+                    : isActive
+                    ? styles.barActive
+                    : ""
+                }`
+              }
+            >
+              Shop
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about-us"
+              className={({ isActive, isPending }) =>
+                `${styles.barNavLink} ${
+                  isPending
+                    ? styles.barPending
+                    : isActive
+                    ? styles.barActive
+                    : ""
+                }`
+              }
+            >
+              About Us
+            </NavLink>
+          </li>
+        </ul>
+      </div>
       <span
         onClick={() => {
           props.setToggleMenu((prev) => !prev);
@@ -24,11 +92,13 @@ function TopNav(props) {
       >
         menu
       </span>
+
       {props.toggleMenu ? (
         <div id={styles.sideMenu}>
-          <ul>
+          <ul id={styles.sideMenuUl}>
             <li>
               <NavLink
+                onClick={() => props.setToggleMenu((prev) => !prev)}
                 to="/"
                 className={({ isActive, isPending }) =>
                   `${styles.navLink} ${
@@ -41,6 +111,7 @@ function TopNav(props) {
             </li>
             <li>
               <NavLink
+                onClick={() => props.setToggleMenu((prev) => !prev)}
                 to="/sign-in"
                 className={({ isActive, isPending }) =>
                   `${styles.navLink} ${
@@ -53,6 +124,7 @@ function TopNav(props) {
             </li>
             <li>
               <NavLink
+                onClick={() => props.setToggleMenu((prev) => !prev)}
                 to="/shop"
                 className={({ isActive, isPending }) =>
                   `${styles.navLink} ${
@@ -65,6 +137,7 @@ function TopNav(props) {
             </li>
             <li>
               <NavLink
+                onClick={() => props.setToggleMenu((prev) => !prev)}
                 to="/about-us"
                 className={({ isActive, isPending }) =>
                   `${styles.navLink} ${

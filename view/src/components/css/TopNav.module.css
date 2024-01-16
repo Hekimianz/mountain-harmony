@@ -20,6 +20,7 @@
   color: #eccc7b;
   font-size: 2em;
   transition: 0.2s all;
+  cursor: pointer;
 }
 
 #sideMenu {
@@ -45,7 +46,7 @@
   rotate: 90deg;
 }
 
-ul {
+#sideMenuUl {
   list-style: none;
   display: flex;
   justify-content: space-evenly;
@@ -58,10 +59,60 @@ ul {
 ul li .navLink {
   color: #232220;
   text-decoration: none;
+  transition: 0.2s all;
 }
 
 ul li .active {
   color: #285340;
   text-decoration: underline;
   font-weight: bold;
+  transition: 0.2s all;
+}
+
+ul li .barNavLink {
+  color: #eccc7b;
+  text-decoration: none;
+}
+
+ul li .barNavLink:hover {
+  color: #eccc7b;
+  text-decoration: underline;
+  text-decoration-color: #eccc7b4f;
+}
+
+ul li .barActive {
+  color: #f3f3bc;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: 0.2s all;
+}
+
+#navBarCont {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#navBarUl {
+  display: flex;
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1.3em;
+  transition: 0.2s all;
+}
+
+@media screen and (min-width: 630px) {
+  #navBarCont {
+    display: flex;
+  }
+
+  .navMenu {
+    display: none;
+  }
 }
