@@ -1,0 +1,146 @@
+#registerMainCont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 20px 0;
+}
+
+#registerInnerCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  background-color: #285340;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border-radius: 8px;
+  color: #eccc7b;
+  font-family: "Merriweather", serif;
+  padding-bottom: 20px;
+  max-width: 800px;
+}
+
+#registerTitle {
+  width: 100%;
+  border-bottom: 1px solid #f3f3bc;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+#registerImg {
+  width: 90%;
+  border-radius: 4px;
+}
+
+#registerText {
+  text-align: center;
+  width: 90%;
+  color: #f3f3bc;
+}
+
+#registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 90%;
+}
+
+.inputErr {
+  color: rgb(255, 75, 75);
+  font-family: "Open Sans", sans-serif;
+}
+
+.invalidInput {
+  border: 2px solid rgb(255, 75, 75);
+}
+
+input {
+  border-radius: 2px;
+  border: 2px solid #232220;
+  padding: 2px 4px;
+  width: 90%;
+  max-width: 200px;
+}
+
+.btn {
+  padding: 8px 15px;
+  border-radius: 9px;
+  background: #6cafe1;
+  border: none;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.4s;
+  color: #232220;
+  font-family: "Open Sans", serif;
+  font-weight: 600;
+  width: 20%;
+  min-width: 100px;
+  max-width: 200px;
+  margin-top: 20px;
+  display: inline;
+}
+
+.btn:hover {
+  box-shadow: 7px 5px 56px -14px #73efb7;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  box-shadow: 7px 5px 56px -10px #73efb7;
+}
+
+label {
+  border-bottom: 1px solid #f3f3bc;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+a {
+  color: #73efb7;
+}
+
+.signIn {
+  margin-top: 20px;
+  text-align: center;
+  width: 90%;
+  opacity: 0.8;
+  transition: 0.2s all;
+  cursor: default;
+}
+
+.signIn:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+@media screen and (min-width: 530px) {
+  #registerForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  .confPass {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+
+  .btnCont,
+  .inputErrCont {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}

@@ -69,12 +69,15 @@ ul li .active {
   transition: 0.2s all;
 }
 
-ul li .barNavLink {
+ul li .barNavLink,
+li {
   color: #eccc7b;
   text-decoration: none;
+  cursor: pointer;
 }
 
-ul li .barNavLink:hover {
+ul li .barNavLink:hover,
+li:hover {
   color: #eccc7b;
   text-decoration: underline;
   text-decoration-color: #eccc7b4f;
@@ -85,6 +88,10 @@ ul li .barActive {
   text-decoration: underline;
   font-weight: bold;
   transition: 0.2s all;
+}
+
+#liOdd {
+  color: #232220;
 }
 
 #navBarCont {

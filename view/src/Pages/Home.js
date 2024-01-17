@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import shopFront from "../assets/shopFront.png";
 import styles from "./css/Home.module.css";
 
-function Home() {
+function Home({ isLogged }) {
   const navigate = useNavigate();
   return (
     <div id={styles.welcomeCont}>
@@ -61,22 +61,24 @@ function Home() {
           >
             Learn More
           </button>
-          <div className={styles.btnsCont}>
-            <button
-              onClick={() => navigate("/sign-in")}
-              className={styles.learnBtn}
-              id={styles.signInBtn}
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => navigate("/register")}
-              className={styles.learnBtn}
-              id={styles.registerBtn}
-            >
-              Register
-            </button>
-          </div>
+          {!isLogged ? (
+            <div className={styles.btnsCont}>
+              <button
+                onClick={() => navigate("/sign-in")}
+                className={styles.learnBtn}
+                id={styles.signInBtn}
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => navigate("/register")}
+                className={styles.learnBtn}
+                id={styles.registerBtn}
+              >
+                Register
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

@@ -7,17 +7,27 @@ import About from "./Pages/About";
 import Register from "./Pages/Register";
 import Shop from "./Pages/Shop";
 import SignIn from "./Pages/SignIn";
+import Profile from "./Pages/Profile";
+
 function App() {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [logged, setLogged] = useState(false);
+
   return (
     <Router>
-      <TopNav toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+      <TopNav
+        toggleMenu={toggleMenu}
+        setToggleMenu={setToggleMenu}
+        isLogged={logged}
+        setLogged={setLogged}
+      />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isLogged={logged} />} />
         <Route path="/about-us" element={<About />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register isLogged={logged} />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-in" element={<SignIn isLogged={logged} />} />
+        <Route path="/profile" element={<Profile isLogged={logged} />} />
       </Routes>
       <Footer />
     </Router>

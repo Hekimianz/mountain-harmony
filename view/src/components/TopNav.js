@@ -1,8 +1,33 @@
 import { useNavigate, NavLink } from "react-router-dom";
 import styles from "./css/TopNav.module.css";
 import logo from "../assets/logo.png";
+import { useEffect } from "react";
 function TopNav(props) {
+  useEffect(() => {
+    if (localStorage.getItem("sessionId")) {
+      props.setLogged(true);
+    } else {
+      props.setLogged(false);
+    }
+  });
   const navigate = useNavigate();
+  async function handleLogout() {
+    try {
+      const response = await fetch("http://localhost:4000/user/logout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data.message);
+      localStorage.removeItem("sessionId");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div id={styles.topNav}>
       <img
@@ -31,22 +56,41 @@ function TopNav(props) {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/sign-in"
-              className={({ isActive, isPending }) =>
-                `${styles.barNavLink} ${
-                  isPending
-                    ? styles.barPending
-                    : isActive
-                    ? styles.barActive
-                    : ""
-                }`
-              }
-            >
-              Sign in
-            </NavLink>
-          </li>
+          {props.isLogged ? (
+            <li>
+              <NavLink
+                to="/profile"
+                className={({ isActive, isPending }) =>
+                  `${styles.barNavLink} ${
+                    isPending
+                      ? styles.barPending
+                      : isActive
+                      ? styles.barActive
+                      : ""
+                  }`
+                }
+              >
+                Profile
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <NavLink
+                to="/sign-in"
+                className={({ isActive, isPending }) =>
+                  `${styles.barNavLink} ${
+                    isPending
+                      ? styles.barPending
+                      : isActive
+                      ? styles.barActive
+                      : ""
+                  }`
+                }
+              >
+                Sign in
+              </NavLink>
+            </li>
+          )}
           <li>
             <NavLink
               to="/shop"
@@ -79,6 +123,9 @@ function TopNav(props) {
               About Us
             </NavLink>
           </li>
+          {props.isLogged ? (
+            <li onClick={() => handleLogout()}>Log Out</li>
+          ) : null}
         </ul>
       </div>
       <span
@@ -109,19 +156,35 @@ function TopNav(props) {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                onClick={() => props.setToggleMenu((prev) => !prev)}
-                to="/sign-in"
-                className={({ isActive, isPending }) =>
-                  `${styles.navLink} ${
-                    isPending ? styles.pending : isActive ? styles.active : ""
-                  }`
-                }
-              >
-                Sign in
-              </NavLink>
-            </li>
+            {props.isLogged ? (
+              <li>
+                <NavLink
+                  onClick={() => props.setToggleMenu((prev) => !prev)}
+                  to="/profile"
+                  className={({ isActive, isPending }) =>
+                    `${styles.navLink} ${
+                      isPending ? styles.pending : isActive ? styles.active : ""
+                    }`
+                  }
+                >
+                  Profile
+                </NavLink>
+              </li>
+            ) : (
+              <li>
+                <NavLink
+                  onClick={() => props.setToggleMenu((prev) => !prev)}
+                  to="/sign-in"
+                  className={({ isActive, isPending }) =>
+                    `${styles.navLink} ${
+                      isPending ? styles.pending : isActive ? styles.active : ""
+                    }`
+                  }
+                >
+                  Sign in
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink
                 onClick={() => props.setToggleMenu((prev) => !prev)}
@@ -148,6 +211,17 @@ function TopNav(props) {
                 About Us
               </NavLink>
             </li>
+            {props.isLogged ? (
+              <li
+                onClick={() => {
+                  props.setToggleMenu((prev) => !prev);
+                  handleLogout();
+                }}
+                id={styles.liOdd}
+              >
+                Log Out
+              </li>
+            ) : null}
           </ul>
         </div>
       ) : null}
