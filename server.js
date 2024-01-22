@@ -4,18 +4,20 @@ const cors = require("cors");
 require("dotenv").config();
 const passport = require("passport");
 const session = require("express-session");
-const pool = require("./models/db");
+
 const productsRoutes = require("./routes/Products");
 const userRoutes = require("./routes/Users");
 
 const PORT = process.env.SERVER_PORT || 4000;
 
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000", // Replace with the URL of your React app
-  })
-);
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "Access-Control-Allow-Credentials": "true",
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -29,13 +31,22 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Move the logging middleware here
+app.use((req, res, next) => {
+  console.log("Request to", req.originalUrl);
+  console.log("Session ID:", req.sessionID);
+  console.log("Authentication status:", req.isAuthenticated());
+  next();
+});
 
 app.use("/products", productsRoutes);
 app.use("/user", userRoutes);

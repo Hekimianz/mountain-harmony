@@ -1,0 +1,49 @@
+.pastOrderCont {
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  color: #232220;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 5px 5px;
+  max-width: 600px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.date {
+  align-self: flex-start;
+  font-size: 0.8em;
+  border-bottom: 1px solid #232220;
+}
+
+.productInfoCont {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  border-bottom: 1px dashed #285340;
+  padding-bottom: 10px;
+}
+
+.productImg {
+  width: 40%;
+  min-width: 40px;
+  border-radius: 2px;
+  border: 1px solid #232220;
+}
+
+.productName {
+  max-width: 100px;
+}
+
+.productTotal {
+  align-self: flex-end;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #23222079;
+}

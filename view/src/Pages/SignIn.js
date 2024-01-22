@@ -14,6 +14,7 @@ function SignIn({ isLogged }) {
     try {
       const response = await fetch("http://localhost:4000/user/login", {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({
           email: email,
           password: password,
@@ -27,7 +28,6 @@ function SignIn({ isLogged }) {
         console.log("Logged in Successfully");
         localStorage.setItem("sessionId", data.sessionId);
         navigate("/");
-        console.log(data);
       } else {
         console.log(data.message);
       }

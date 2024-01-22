@@ -61,7 +61,11 @@ module.exports = {
   login: [
     passport.authenticate("local"),
     (req, res) => {
-      res.json({ message: "Logged in succesfully", sessionId: req.session.id });
+      res.json({
+        message: "Logged in succesfully",
+        sessionId: req.session.id,
+        isAuthenticated: req.isAuthenticated(),
+      });
     },
   ],
 
@@ -75,12 +79,16 @@ module.exports = {
   },
 
   profile: (req, res) => {
-    if (req.isAuthenticated()) {
-      const userData = { ...req.user };
-      delete userData.password;
-      res.json(userData);
-    } else {
-      res.status(401).json({ message: "Not authenticated" });
+    try {
+      if (req.isAuthenticated()) {
+        const userData = { ...req.user };
+        delete userData.password;
+        res.json(userData);
+      } else {
+        res.status(401).json({ message: "Not authenticated" });
+      }
+    } catch (err) {
+      console.log(err);
     }
   },
 

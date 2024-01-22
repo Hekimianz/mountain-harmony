@@ -4,6 +4,7 @@ import styles from "./css/Home.module.css";
 
 function Home({ isLogged }) {
   const navigate = useNavigate();
+
   return (
     <div id={styles.welcomeCont}>
       <img className={styles.contImg} src={shopFront} alt="mountain range" />

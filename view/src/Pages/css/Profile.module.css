@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
+  margin: 70px 0;
 }
 
 #profileInnerCont {
@@ -11,4 +13,41 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #285340;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  color: #eccc7b;
+  width: 90%;
+  border-radius: 8px;
+  padding-bottom: 20px;
+  margin: 20px 0;
+}
+
+#usernameTitle {
+  width: 100%;
+  border-bottom: 1px solid #f3f3bc;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#accntInfoCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#pastOrdersCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#pastOrdersTitle {
+  border-bottom: 1px solid #f3f3bc;
+  text-align: center;
+  padding: 20px 0;
 }
