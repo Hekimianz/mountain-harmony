@@ -195,7 +195,7 @@ module.exports = {
       try {
         const userId = req.user.id;
         const allOrders = await pool.query(
-          "SELECT o.id AS order_id, o.order_date, p.name AS product, po.quantity AS quantity, po.quantity * p.price AS total_cost FROM orders o INNER JOIN products_orders po ON o.id = po.order_id INNER JOIN products p ON p.id = po.product_id WHERE o.user_id = $1",
+          "SELECT o.id AS order_id, o.order_date, jsonb_agg(jsonb_build_object('name', p.name, 'quantity', po.quantity, 'cost', po.quantity * p.price, 'image', p.image_url)) AS order FROM orders o INNER JOIN products_orders po ON o.id = po.order_id INNER JOIN products p ON p.id = po.product_id WHERE o.user_id = $1 GROUP BY o.id, o.order_date ORDER BY o.id;",
           [userId]
         );
 

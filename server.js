@@ -14,7 +14,8 @@ const corsOptions = {
   origin: "http://localhost:3000",
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "Access-Control-Allow-Credentials": "true",
+  // Remove the quotes around true here
+  "Access-Control-Allow-Credentials": true,
 };
 
 app.use(cors(corsOptions));

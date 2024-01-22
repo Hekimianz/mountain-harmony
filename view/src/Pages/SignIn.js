@@ -65,7 +65,12 @@ function SignIn({ isLogged }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input className={styles.btn} type="submit" value="Sign In" />
+          <input
+            className={styles.btn}
+            type="button"
+            onClick={submitForm}
+            value="Sign In"
+          />
         </form>
       </div>
     </div>
