@@ -44,11 +44,18 @@
   width: 90%;
   background-color: aliceblue;
   margin: 20px 0;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   overflow-x: scroll;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
   padding-right: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  .shopShelf {
+    height: 350px;
+  }
 }
