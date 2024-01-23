@@ -16,10 +16,10 @@ function Shop() {
   };
   useEffect(() => {
     fetchProducts("featured", setFeaturedProducts);
-    fetchProducts("featured", setTrendingProducts);
-    fetchProducts("featured", setNewProducts);
-    fetchProducts("featured", setAccessories);
-    fetchProducts("featured", setMerch);
+    fetchProducts("trending", setTrendingProducts);
+    fetchProducts("new", setNewProducts);
+    fetchProducts("accessories", setAccessories);
+    fetchProducts("merch", setMerch);
   }, []);
 
   const renderProducts = (categoryState) => {

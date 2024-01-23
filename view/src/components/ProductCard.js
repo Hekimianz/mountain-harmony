@@ -4,7 +4,7 @@ function ProductCard({ name, image, cost }) {
   return (
     <div className={styles.productCardMainCont}>
       <h2 className={styles.productName}>{name}</h2>
-      <img className={styles.productImg} src={`${image}`} alt="product image" />
+      <img className={styles.productImg} src={`${image}`} alt="product" />
       <div className={styles.productInfoCont}>
         <span className={"material-symbols-outlined " + styles.productInfoBtn}>
           info
