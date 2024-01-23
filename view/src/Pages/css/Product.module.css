@@ -1,0 +1,95 @@
+#productMainCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0;
+  height: 100%;
+  font-family: "Merriweather";
+  cursor: default;
+}
+
+#productInnerCont {
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  background-color: #285340;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border-radius: 8px;
+  padding: 20px 0;
+}
+
+#productTitle {
+  margin: 0;
+  color: #eccc7b;
+  border-bottom: 1px solid #f3f3bc;
+  text-align: center;
+  width: 100%;
+  font-size: 1.8em;
+  padding-bottom: 20px;
+}
+
+#productInfoCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+
+  min-height: 200px;
+}
+
+#productImg {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 4px;
+  margin: 20px 0;
+  border: 1px solid #2322207e;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+#productDesc {
+  color: #f3f3bc;
+  font-family: "Merriweather";
+  text-align: center;
+  margin: 0;
+}
+
+#productBtnsCont {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 20px;
+  padding-right: 20px;
+  font-size: 1em;
+  color: #eccc7b;
+}
+
+.productAddCartBtn {
+  cursor: pointer;
+  transition: 0.2s all;
+}
+
+.productAddCartBtn:hover {
+  color: #f3f3bc;
+}
+
+@media screen and (min-width: 670px) {
+  #productDesc {
+    width: 60%;
+    font-size: 1.3em;
+  }
+
+  #productBtnsCont {
+    font-size: 1.3em;
+  }
+
+  .productAddCartBtn {
+    font-size: 1.5em;
+  }
+}

@@ -8,6 +8,7 @@ import Register from "./Pages/Register";
 import Shop from "./Pages/Shop";
 import SignIn from "./Pages/SignIn";
 import Profile from "./Pages/Profile";
+import Product from "./Pages/Product";
 
 function App() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -28,6 +29,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/sign-in" element={<SignIn isLogged={logged} />} />
         <Route path="/profile" element={<Profile isLogged={logged} />} />
+        <Route path="/product/:id" element={<Product />} />
       </Routes>
       <Footer />
     </Router>

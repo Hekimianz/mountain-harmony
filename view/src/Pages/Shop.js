@@ -29,6 +29,7 @@ function Shop() {
           name={product.name}
           cost={product.price}
           image={product.image_url}
+          id={product.id}
           key={product.id}
         />
       );
