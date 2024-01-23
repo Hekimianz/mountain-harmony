@@ -1,0 +1,21 @@
+.cartItemCont {
+  display: flex;
+  height: 100px;
+  width: 90%;
+
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans";
+  color: #f3f3bc;
+  gap: 15px;
+  border-bottom: 1px dashed #f3f3bc;
+}
+
+.cartProductImg {
+  height: 70%;
+  border-radius: 4px;
+}
+
+.cartProductName {
+  font-size: 0.7em;
+}

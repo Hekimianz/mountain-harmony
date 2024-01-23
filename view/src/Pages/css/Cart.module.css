@@ -1,0 +1,36 @@
+#cartMainCont {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#cartInnerCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  width: 90%;
+  background-color: #285340;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border-radius: 8px;
+}
+#cartTitle {
+  width: 100%;
+  text-align: center;
+  color: #eccc7b;
+  border-bottom: 1px solid #f3f3bc;
+  margin: 0;
+  padding-bottom: 20px;
+  font-family: "Merriweather";
+  margin-bottom: 20px;
+}
+
+#cartTotal {
+  margin-top: 20px;
+  margin-right: 20px;
+  color: #f3f3bc;
+  align-self: flex-end;
+}

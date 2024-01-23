@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./css/SignIn.module.css";
 function SignIn({ isLogged }) {
   const [email, setEmail] = useState("");
@@ -25,11 +25,8 @@ function SignIn({ isLogged }) {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log("Logged in Successfully");
         localStorage.setItem("sessionId", data.sessionId);
         navigate("/");
-      } else {
-        console.log(data.message);
       }
     } catch (err) {
       console.log(err);
@@ -72,6 +69,9 @@ function SignIn({ isLogged }) {
             value="Sign In"
           />
         </form>
+        <p className={styles.register}>
+          Dont have an account? <Link to="/register">Register here!</Link>
+        </p>
       </div>
     </div>
   );

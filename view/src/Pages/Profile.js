@@ -34,8 +34,6 @@ function Profile({ isLogged }) {
           credentials: "include",
         });
         const data = await response.json();
-        console.log(data);
-
         setPastOrders(data);
       } catch (err) {
         console.error("Error fetching orders", err);

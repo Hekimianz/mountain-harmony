@@ -21,7 +21,6 @@ function TopNav(props) {
         },
       });
       const data = await response.json();
-      console.log(data.message);
       localStorage.removeItem("sessionId");
       navigate("/");
     } catch (err) {

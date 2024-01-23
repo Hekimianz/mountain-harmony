@@ -66,3 +66,22 @@
 label {
   color: #eccc7b;
 }
+
+a {
+  color: #73efb7;
+}
+
+.register {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+  opacity: 0.8;
+  transition: 0.2s all;
+  cursor: default;
+  color: #eccc7b;
+}
+
+.register:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
