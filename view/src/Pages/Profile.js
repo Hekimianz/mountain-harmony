@@ -54,7 +54,7 @@ function Profile({ isLogged }) {
         />
       );
     });
-    return orders;
+    return orders.reverse();
   };
 
   return (

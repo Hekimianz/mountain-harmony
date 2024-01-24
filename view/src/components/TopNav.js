@@ -20,7 +20,7 @@ function TopNav(props) {
           "Content-Type": "application/json",
         },
       });
-      const data = await response.json();
+      await response.json();
       localStorage.removeItem("sessionId");
       navigate("/");
     } catch (err) {

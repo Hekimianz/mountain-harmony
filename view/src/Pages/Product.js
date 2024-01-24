@@ -5,14 +5,15 @@ import styles from "./css/Product.module.css";
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const fetchData = async () => {
-    const response = await fetch(`http://localhost:4000/products/${id}`);
-    const data = await response.json();
-    setProduct(data);
-  };
+
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:4000/products/${id}`);
+      const data = await response.json();
+      setProduct(data);
+    };
     fetchData();
-  }, []);
+  }, [id]);
   return (
     <div id={styles.productMainCont}>
       <div id={styles.productInnerCont}>

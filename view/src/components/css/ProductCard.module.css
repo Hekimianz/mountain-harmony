@@ -46,12 +46,18 @@
 .productAddCartBtn {
   cursor: pointer;
   transition: 0.2s all;
+  user-select: none;
 }
 
 .productInfoBtn:hover,
 .productAddCartBtn:hover {
   color: #285340;
   transform: scale(1.1);
+}
+
+.productAddCartBtn:active {
+  transform: scale(1.2);
+  transform: rotate(20deg);
 }
 
 @media screen and (min-width: 1024px) {

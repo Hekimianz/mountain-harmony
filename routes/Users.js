@@ -17,6 +17,8 @@ router.get("/profile", isAuthenticated, usersController.profile);
 router.get("/cart", isAuthenticated, usersController.getCart);
 router.post("/cart", isAuthenticated, usersController.addToCart);
 router.delete("/cart", isAuthenticated, usersController.removeFromCart);
+router.put("/cart/increase", isAuthenticated, usersController.increaseQuantity);
+router.put("/cart/decrease", isAuthenticated, usersController.decreaseQuantity);
 router.post("/checkout", isAuthenticated, usersController.checkOut);
 router.get("/orders", isAuthenticated, usersController.getPastOrders);
 router.get("/order/:id", isAuthenticated, usersController.getPastOrderById);

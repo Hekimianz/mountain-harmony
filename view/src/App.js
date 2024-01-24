@@ -30,7 +30,7 @@ function App() {
         <Route path="/about-us" element={<About />} />
         <Route path="/register" element={<Register isLogged={logged} />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Shop isLogged={logged} />} />
         <Route path="/sign-in" element={<SignIn isLogged={logged} />} />
         <Route path="/profile" element={<Profile isLogged={logged} />} />
         <Route path="/product/:id" element={<Product />} />

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./css/Shop.module.css";
 import ProductCard from "../components/ProductCard";
-function Shop() {
+function Shop({ isLogged }) {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
@@ -31,6 +31,7 @@ function Shop() {
           image={product.image_url}
           id={product.id}
           key={product.id}
+          isLogged={isLogged}
         />
       );
     });

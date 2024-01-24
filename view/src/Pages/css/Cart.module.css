@@ -1,6 +1,7 @@
 #cartMainCont {
   display: flex;
   width: 100%;
+  height: 100%;
   margin: 20px 0;
   align-items: center;
   justify-content: center;
@@ -12,6 +13,7 @@
   align-items: center;
   padding: 20px 0;
   width: 90%;
+  max-width: 800px;
   background-color: #285340;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
@@ -33,4 +35,68 @@
   margin-right: 20px;
   color: #f3f3bc;
   align-self: flex-end;
+  font-weight: bold;
+}
+
+.checkoutBtn,
+.checkoutBtnInactive {
+  margin-top: 20px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  background: #6cafe1;
+  border: none;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.4s;
+  color: #232220;
+  font-family: "Open Sans", serif;
+  font-weight: 600;
+}
+
+.checkoutBtnInactive {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.checkoutBtn:hover {
+  box-shadow: 7px 5px 56px -14px #73efb7;
+}
+
+.checkoutBtn:active {
+  transform: scale(0.97);
+  box-shadow: 7px 5px 56px -10px #73efb7;
+}
+
+#afterCheckoutCont {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#afterCheckoutText {
+  background-color: #eccc7b;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  width: 90%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+  color: #232220;
+  font-weight: 600;
+}
+
+.closeText {
+  cursor: pointer;
+  color: #285340;
+  font-size: 2em;
+}
+
+#emptyCart {
+  color: #f3f3bc;
 }

@@ -1,8 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./css/ProductCard.module.css";
 
-function ProductCard({ name, image, cost, id }) {
+function ProductCard({ name, image, cost, id, isLogged }) {
   const navigate = useNavigate();
+  const addToCart = async () => {
+    await fetch("http://localhost:4000/user/cart", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        quantity: 1,
+        productId: id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   return (
     <div className={styles.productCardMainCont}>
       <h2 className={styles.productName}>{name}</h2>
@@ -15,11 +28,16 @@ function ProductCard({ name, image, cost, id }) {
           info
         </span>
         <span className={styles.productPrice}>{cost}</span>
-        <span
-          className={"material-symbols-outlined " + styles.productAddCartBtn}
-        >
-          add_shopping_cart
-        </span>
+        {isLogged ? (
+          <span
+            className={"material-symbols-outlined " + styles.productAddCartBtn}
+            onClick={() => {
+              addToCart();
+            }}
+          >
+            add_shopping_cart
+          </span>
+        ) : null}
       </div>
     </div>
   );

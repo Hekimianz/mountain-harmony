@@ -97,9 +97,10 @@ module.exports = {
       try {
         const userId = req.user.id;
         const usersCart = await pool.query(
-          "SELECT u.name AS UserName, p.id AS ProductID, p.name AS ProductName, p.description, p.price, p.category, p.image_url, cp.quantity FROM  users u INNER JOIN carts c ON u.id = c.user_id INNER JOIN carts_products cp ON c.id = cp.cart_id INNER JOIN products p ON cp.product_id = p.id WHERE u.id = $1;",
+          "SELECT u.name AS UserName, p.id AS ProductID, p.name AS ProductName, p.description, p.price, p.category, p.image_url, SUM(cp.quantity) AS quantity FROM users u INNER JOIN carts c ON u.id = c.user_id INNER JOIN carts_products cp ON c.id = cp.cart_id INNER JOIN products p ON cp.product_id = p.id WHERE u.id = $1 GROUP BY u.name, p.id, p.name, p.description, p.price, p.category, p.image_url;",
           [userId]
         );
+
         res.json(usersCart.rows);
       } catch (error) {
         res.status(500).json({ message: "Something went wrong" });
@@ -112,25 +113,129 @@ module.exports = {
     if (req.isAuthenticated()) {
       try {
         const userId = req.user.id;
-        const productId = req.body.productId;
-        const quantity = req.body.quantity;
+        const { productId, quantity } = req.body;
+
+        // Check if productId and quantity are provided
+        if (!productId || !quantity) {
+          return res
+            .status(400)
+            .json({ message: "ProductId and quantity are required" });
+        }
+
         const cartResult = await pool.query(
           "SELECT id FROM carts WHERE user_id = $1",
           [userId]
         );
+
+        // Check if the user has a cart
+        if (cartResult.rows.length === 0) {
+          return res.status(404).json({ message: "User does not have a cart" });
+        }
+
         const cartId = cartResult.rows[0].id;
-        await pool.query(
-          "INSERT INTO carts_products (cart_id, product_id, quantity) VALUES ($1, $2, $3)",
-          [cartId, productId, quantity]
+
+        // Check if the product is already in the cart
+        const existingProduct = await pool.query(
+          "SELECT quantity FROM carts_products WHERE cart_id = $1 AND product_id = $2",
+          [cartId, productId]
         );
+
+        if (existingProduct.rows.length > 0) {
+          // Product is already in the cart, update the quantity
+          const updatedQuantity = existingProduct.rows[0].quantity + quantity;
+          await pool.query(
+            "UPDATE carts_products SET quantity = $1 WHERE cart_id = $2 AND product_id = $3",
+            [updatedQuantity, cartId, productId]
+          );
+        } else {
+          // Product is not in the cart, insert a new row
+          await pool.query(
+            "INSERT INTO carts_products (cart_id, product_id, quantity) VALUES ($1, $2, $3)",
+            [cartId, productId, quantity]
+          );
+        }
+
         res.json({ message: "Product added to cart successfully" });
       } catch (error) {
+        console.error(error);
         res.status(500).json({ message: "Something went wrong" });
       }
     } else {
       res.status(401).json({ message: "Not authenticated" });
     }
   },
+  increaseQuantity: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const productId = req.body.productId;
+        const cartResult = await pool.query(
+          "SELECT id FROM carts WHERE user_id = $1",
+          [userId]
+        );
+        const cartId = cartResult.rows[0].id;
+        await pool.query(
+          `
+        UPDATE carts_products
+        SET quantity = quantity + 1
+        WHERE cart_id = $1 AND product_id = $2
+      `,
+          [cartId, productId]
+        );
+        res.json({ message: "Quantity increased" });
+      } catch (err) {
+        res.status(500).json({ message: "Something went wrong" });
+      }
+    }
+  },
+  decreaseQuantity: async (req, res) => {
+    if (req.isAuthenticated()) {
+      try {
+        const userId = req.user.id;
+        const productId = req.body.productId;
+
+        const cartResult = await pool.query(
+          "SELECT id FROM carts WHERE user_id = $1",
+          [userId]
+        );
+
+        if (cartResult.rows.length === 0) {
+          // The user doesn't have a cart
+          return res.status(404).json({ message: "User does not have a cart" });
+        }
+
+        const cartId = cartResult.rows[0].id;
+
+        const existingProduct = await pool.query(
+          "SELECT quantity FROM carts_products WHERE cart_id = $1 AND product_id = $2",
+          [cartId, productId]
+        );
+
+        if (existingProduct.rows.length === 0) {
+          // The product is not in the cart
+          return res
+            .status(404)
+            .json({ message: "Product not found in the cart" });
+        }
+
+        // Decrease the quantity
+        const updatedQuantity = Math.max(
+          existingProduct.rows[0].quantity - 1,
+          0
+        );
+        await pool.query(
+          "UPDATE carts_products SET quantity = $1 WHERE cart_id = $2 AND product_id = $3",
+          [updatedQuantity, cartId, productId]
+        );
+
+        res.json({ message: "Quantity decreased" });
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Something went wrong" });
+      }
+    }
+  },
+
   removeFromCart: async (req, res) => {
     if (req.isAuthenticated()) {
       try {
