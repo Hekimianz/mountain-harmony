@@ -11,7 +11,7 @@ const userRoutes = require("./routes/Users");
 const PORT = process.env.SERVER_PORT || 4000;
 
 const corsOptions = {
-  origin: "https://mountain-harmony-api.onrender.com/",
+  origin: "https://mountain-harmony.onrender.com",
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   // Remove the quotes around true here
