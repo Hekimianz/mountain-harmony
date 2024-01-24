@@ -14,30 +14,36 @@ function CartItem({
   };
 
   async function increaseQuantity(id) {
-    await fetch("http://localhost:4000/user/cart/increase", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: id,
-      }),
-    });
+    await fetch(
+      "https://mountain-harmony-api.onrender.com/user/cart/increase",
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: id,
+        }),
+      }
+    );
     onUpdateCart();
   }
 
   async function decreaseQuantity(id) {
-    await fetch("http://localhost:4000/user/cart/decrease", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: id,
-      }),
-    });
+    await fetch(
+      "https://mountain-harmony-api.onrender.com/user/cart/decrease",
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: id,
+        }),
+      }
+    );
     onUpdateCart();
   }
 

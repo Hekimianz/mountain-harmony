@@ -9,7 +9,7 @@ function Shop({ isLogged }) {
   const [merch, setMerch] = useState([]);
   const fetchProducts = async (category, setter) => {
     const response = await fetch(
-      `http://localhost:4000/products/?category=${category}`
+      `https://mountain-harmony-api.onrender.com/products/?category=${category}`
     );
     const data = await response.json();
     setter(data);

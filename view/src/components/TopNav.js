@@ -13,13 +13,16 @@ function TopNav(props) {
   const navigate = useNavigate();
   async function handleLogout() {
     try {
-      const response = await fetch("http://localhost:4000/user/logout", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://mountain-harmony-api.onrender.com/user/logout",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       await response.json();
       localStorage.removeItem("sessionId");
       navigate("/");

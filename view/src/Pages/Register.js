@@ -26,18 +26,21 @@ function Register({ isLogged }) {
   }
   async function submitForm() {
     try {
-      const response = await fetch("http://localhost:4000/user/register", {
-        method: "POST",
-        body: JSON.stringify({
-          name: name,
-          username: username,
-          email: email,
-          password: password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://mountain-harmony-api.onrender.com/user/register",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: name,
+            username: username,
+            email: email,
+            password: password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         console.log("Registered Successfully");

@@ -13,9 +13,12 @@ function Cart() {
   useEffect(() => {
     if (localStorage.getItem("sessionId")) {
       const fetchData = async () => {
-        const response = await fetch("http://localhost:4000/user/cart", {
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://mountain-harmony-api.onrender.com/user/cart",
+          {
+            credentials: "include",
+          }
+        );
         const data = await response.json();
         console.log(data);
         setCart(data);
@@ -30,9 +33,12 @@ function Cart() {
   let total = 0;
 
   const handleUpdateCart = async () => {
-    const updatedResponse = await fetch("http://localhost:4000/user/cart", {
-      credentials: "include",
-    });
+    const updatedResponse = await fetch(
+      "https://mountain-harmony-api.onrender.com/user/cart",
+      {
+        credentials: "include",
+      }
+    );
     const updatedData = await updatedResponse.json();
     setCart(updatedData);
   };
@@ -54,16 +60,19 @@ function Cart() {
   });
 
   const handleDelete = async (productId) => {
-    const response = await fetch("http://localhost:4000/user/cart", {
-      credentials: "include",
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: productId,
-      }),
-    });
+    const response = await fetch(
+      "https://mountain-harmony-api.onrender.com/user/cart",
+      {
+        credentials: "include",
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: productId,
+        }),
+      }
+    );
 
     const data = await response.json();
     console.log(data);
@@ -73,7 +82,7 @@ function Cart() {
   };
 
   async function checkout() {
-    await fetch("http://localhost:4000/user/checkout", {
+    await fetch("https://mountain-harmony-api.onrender.com/user/checkout", {
       method: "POST",
       credentials: "include",
     });

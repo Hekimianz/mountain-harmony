@@ -14,8 +14,7 @@ const corsOptions = {
   origin: "https://mountain-harmony.onrender.com",
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  // Remove the quotes around true here
-  "Access-Control-Allow-Credentials": true,
+  "access-control-allow-credentials": true,
 };
 
 app.use(cors(corsOptions));

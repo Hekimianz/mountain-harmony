@@ -4,7 +4,7 @@ import styles from "./css/ProductCard.module.css";
 function ProductCard({ name, image, cost, id, isLogged }) {
   const navigate = useNavigate();
   const addToCart = async () => {
-    await fetch("http://localhost:4000/user/cart", {
+    await fetch("https://mountain-harmony-api.onrender.com/user/cart", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({

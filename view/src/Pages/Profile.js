@@ -19,9 +19,12 @@ function Profile({ isLogged }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/user/profile", {
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://mountain-harmony-api.onrender.com/user/profile",
+          {
+            credentials: "include",
+          }
+        );
         const data = await response.json();
         setUserData(data);
       } catch (err) {
@@ -30,9 +33,12 @@ function Profile({ isLogged }) {
     };
     const fetchPastOrders = async () => {
       try {
-        const response = await fetch("http://localhost:4000/user/orders", {
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://mountain-harmony-api.onrender.com/user/orders",
+          {
+            credentials: "include",
+          }
+        );
         const data = await response.json();
         setPastOrders(data);
       } catch (err) {

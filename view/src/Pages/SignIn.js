@@ -12,17 +12,20 @@ function SignIn({ isLogged }) {
   });
   async function submitForm() {
     try {
-      const response = await fetch("http://localhost:4000/user/login", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://mountain-harmony-api.onrender.com/user/login",
+        {
+          method: "POST",
+          credentials: "include",
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem("sessionId", data.sessionId);
